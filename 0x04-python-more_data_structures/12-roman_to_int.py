@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def to_subtract(list_num):
     return max(list_num) - sum(filter(lambda x: max(list_num) > x, list_num))
 
