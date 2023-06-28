@@ -115,4 +115,14 @@ class Square:
         Returns:
             str: String representation of the square.
         """
-        return self.my_print()
+        if self.size == 0:
+            return ""
+
+        square_str = ""
+        for _ in range(self.position[1]):
+            square_str += "\n"
+
+        for _ in range(self.size):
+            square_str += " " * self.position[0] + "#" * self.size + "\n"
+
+        return square_str[:-1]  # Remove the last newline character
