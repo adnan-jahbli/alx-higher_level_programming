@@ -1,0 +1,56 @@
+TEST cases for 0-add_integers.py
+--------------------------------
+--------------------------------
+>>> add_integer = __import__('0-add_integer').add_integer
+>>> print(add_integer(1, 2))
+3
+>>> print(add_integer(-1, 2))
+1
+>>> print(add_integer(1, -2))
+-1
+>>> print(add_integer(-1, -2))
+-3
+>>> print(add_integer(100.50, 2))
+102
+>>> print(add_integer(100.50, 2.50))
+102
+>>> print(add_integer(-100.50, 2.50))
+-98
+>>> print(add_integer(-100.50, -2.50))
+-102
+>>> print(add_integer(100.50))
+198
+>>> print(add_integer(-100))
+-2
+>>> print(add_integer())
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: add_integer() missing 1 required positional argument: 'a'
+>>> print(add_integer('Hello'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/vagrant/alx-higher_level_programming/0x07-python-test_driven_development/0-add_integer.py", line 19, in add_integer
+    raise TypeError('a must be an integer')
+TypeError: a must be an integer
+>>> print(add_integer('Hello', 100))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/vagrant/alx-higher_level_programming/0x07-python-test_driven_development/0-add_integer.py", line 19, in add_integer
+    raise TypeError('a must be an integer')
+TypeError: a must be an integer
+>>> print(add_integer(100, "text"))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/vagrant/alx-higher_level_programming/0x07-python-test_driven_development/0-add_integer.py", line 21, in add_integer
+    raise TypeError('b must be an integer')
+TypeError: b must be an integer
+>>> print(add_integer([1, 2]))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/vagrant/alx-higher_level_programming/0x07-python-test_driven_development/0-add_integer.py", line 19, in add_integer
+    raise TypeError('a must be an integer')
+TypeError: a must be an integer
+>>> print(add_integer(0, 0))
+0
+>>> print(add_integer(0.5, -0))
+0
