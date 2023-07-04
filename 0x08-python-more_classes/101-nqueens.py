@@ -4,78 +4,107 @@ This module implements a backtracking algorithm
 for solving the N-Queen puzzle.
 
 """
+import sys
 
 
-def is_safe(queens_positions, current_queen):
-    """Check if the queens can attack each other.
+def isSafe(board, row, col):
+    """
+    Check if a queen can be placed at the given position
+    without attacking other queens.
 
     Args:
-        queens_positions (list): List of queens' positions.
-        current_queen (int): Index of the current queen.
+        board: 2D list representing the chessboard configuration
+        row: Row index of the position to check
+        col: Column index of the position to check
 
     Returns:
-        bool: True if the queens can't attack each other, False otherwise.
+        True if a queen can be placed at the given position
+        without attacking other queens, False otherwise.
     """
-    for i in range(current_queen):
-        if queens_positions[i] == queens_positions[current_queen]:
+    # Check if there is a queen in the same row
+    for i in range(col):
+        if board[row][i] == 1:
             return False
-        if abs(queens_positions[i] - queens_positions[current_queen]) \
-                == abs(i - current_queen):
+
+    # Check if there is a queen in the upper left diagonal
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 1:
             return False
+
+    # Check if there is a queen in the lower left diagonal
+    for i, j in zip(range(row, len(board)), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+
     return True
 
 
-def print_queens_positions(queens_positions, size):
-    """Print the positions of the queens on the chessboard.
+def solveNQueens(N):
+    """
+    Solve the N queens problem and print the solutions.
 
     Args:
-        queens_positions (list): List of queens' positions.
-        size (int): Size of the chessboard.
+        N: Number of queens and size of the chessboard.
     """
-    positions = []
-    for i in range(size):
-        positions.append([i, queens_positions[i]])
-    print(positions)
-
-
-def solve_n_queens(size):
-    """Solve the N-Queen puzzle using backtracking.
-
-    Args:
-        size (int): Size of the chessboard.
-    """
-    queens_positions = [-1] * size
-
-    def queen_backtracking(current_queen):
-        if current_queen == size:
-            print_queens_positions(queens_positions, size)
-            return
-
-        queens_positions[current_queen] = -1
-
-        while queens_positions[current_queen] < size - 1:
-            queens_positions[current_queen] += 1
-            if is_safe(queens_positions, current_queen):
-                queen_backtracking(current_queen + 1)
-
-    queen_backtracking(0)
-
-
-if __name__ == '__main__':
-    import sys
-
-    if len(sys.argv) != 2:
-        print("Usage: nqueens.py N")
-        sys.exit(1)
-
-    try:
-        size = int(sys.argv[1])
-    except ValueError:
-        print("N must be a number")
-        sys.exit(1)
-
-    if size < 4:
+    if N < 4:
         print("N must be at least 4")
         sys.exit(1)
 
-    solve_n_queens(size)
+    # Initialize the chessboard
+    board = [[0] * N for _ in range(N)]
+
+    # Start solving the problem from the first column
+    solveNQueensUtil(board, 0)
+
+
+def solveNQueensUtil(board, col):
+    """
+    Recursive utility function to solve the N queens problem.
+
+    Args:
+        board: 2D list representing the chessboard configuration
+        col: Current column index to consider placing the queen
+    """
+    if col >= len(board):
+        # All queens have been placed, print the solution
+        printSolution(board)
+        return
+
+    for i in range(len(board)):
+        if isSafe(board, i, col):
+            # Place a queen at the current position
+            board[i][col] = 1
+
+            # Recur to the next column
+            solveNQueensUtil(board, col + 1)
+
+            # Backtrack and remove the queen from the current position
+            board[i][col] = 0
+
+
+def printSolution(board):
+    """
+    Print the chessboard configuration representing a solution.
+
+    Args:
+        board: 2D list representing the chessboard configuration
+    """
+    for row in board:
+        print(" ".join(str(cell) for cell in row))
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        # Invalid number of arguments, print usage message and exit
+        print("Usage: nqueens N")
+        sys.exit(1)
+
+    try:
+        N = int(sys.argv[1])
+    except ValueError:
+        # Invalid argument, N must be a number
+        print("N must be a number")
+        sys.exit(1)
+
+    # Solve the N queens problem
+    solveNQueens(N)
