@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 def inherits_from(obj, a_class):
-    """ Checks if an object was instantiated from a given class
-    that inherited directly or indirectly from the specified class.
+    """ Checks if an object was instantiated _from a given class
+    that inherited directly or indirectly _from the specified class.
 
     Args:
         obj: the given object
@@ -10,6 +10,4 @@ def inherits_from(obj, a_class):
     Returns:
         True or false.
     """
-    if type(obj) is a_class:
-        return False
-    return isinstance(obj, a_class)
+    return issubclass(type(obj), a_class) and type(obj) is not a_class
