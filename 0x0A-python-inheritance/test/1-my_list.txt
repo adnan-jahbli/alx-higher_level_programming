@@ -1,0 +1,114 @@
+The "1-my_list" module
+============================
+
+Using the `MyList` class
+---------------------
+
+Importing the `MyList` class _from the module:
+    >>> MyList = __import__('1-my_list').MyList
+
+
+Printing a sorted list with positive numbers:
+    >>> my_list = MyList()
+    >>> my_list.append(0)
+    >>> my_list.append(4)
+    >>> my_list.append(1)
+    >>> my_list.append(10)
+    >>> my_list.append(3)
+    >>> my_list.append(7)
+    >>> my_list.print_sorted()
+    [0, 1, 3, 4, 7, 10]
+
+
+Printing a sorted list with repeated numbers:
+    >>> my_list = MyList()
+    >>> my_list.append(1)
+    >>> my_list.append(1)
+    >>> my_list.append(2)
+    >>> my_list.append(2)
+    >>> my_list.append(2)
+    >>> my_list.print_sorted()
+    [1, 1, 2, 2, 2]
+
+
+Printing a sorted list with a single number:
+    >>> my_list = MyList()
+    >>> my_list.append(3)
+    >>> my_list.print_sorted()
+    [3]
+
+
+Printing a sorted list with positive and negative numbers:
+    >>> my_list = MyList()
+    >>> my_list.append(-5)
+    >>> my_list.append(5)
+    >>> my_list.append(4)
+    >>> my_list.append(0)
+    >>> my_list.append(-4)
+    >>> my_list.append(1)
+    >>> my_list.append(-1)
+    >>> my_list.print_sorted()
+    [-5, -4, -1, 0, 1, 4, 5]
+
+
+Printing an empty list:
+    >>> my_list = MyList()
+    >>> my_list.print_sorted()
+    []
+
+
+Checking if `MyList` is an instance of the `list` class:
+    >>> my_list = MyList()
+    >>> isinstance(my_list, list)
+    True
+
+
+Checking if the instance has the correct type:
+    >>> my_list = MyList()
+    >>> type(my_list) == MyList
+    True
+
+
+Checking if `MyList` is a subclass of the `list` class:
+    >>> issubclass(MyList, list)
+    True
+
+
+Testing the `print_sorted` method with incorrect number of arguments:
+    >>> my_list = MyList()
+    >>> my_list.print_sorted([1, 2, 3])
+    Traceback (most recent call last):
+    	      ...
+    TypeError: print_sorted() takes 1 positional argument but 2 were given
+
+
+Testing the `print_sorted` method with multiple arguments:
+    >>> my_list = MyList()
+    >>> my_list.print_sorted([1, 2], [5, 4])
+    Traceback (most recent call last):
+    	      ...
+    TypeError: print_sorted() takes 1 positional argument but 3 were given
+
+
+Checking the type of the `print_sorted` method:
+    >>> my_list = MyList()
+    >>> type(my_list.print_sorted)
+    <class 'method'>
+
+
+Checking if the list is printable as a string:
+    >>> my_list = MyList()
+    >>> my_list.append(5)
+    >>> print(my_list)
+    [5]
+
+
+Checking if `print_sorted` returns a new list:
+    >>> my_list = MyList()
+    >>> my_list.append(7)
+    >>> my_list.append(1)
+    >>> my_list.append(2)
+    >>> my_list.print_sorted()
+    [1, 2, 7]
+    >>> my_list
+    [7, 1, 2]
