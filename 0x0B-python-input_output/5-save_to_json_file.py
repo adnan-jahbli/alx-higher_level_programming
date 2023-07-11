@@ -4,7 +4,7 @@ using a JSON representation"""
 import json
 
 
-def from_json_string(my_obj, filename):
+def save_to_json_file(my_obj, filename):
     """ This function writes an Object to a text file using
         JSON representation..
 
