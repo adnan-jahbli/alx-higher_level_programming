@@ -12,6 +12,6 @@ def class_to_json(obj):
     """
     dict_d = {}
     if hasattr(obj, "__dict__"):
-        dict_t = obj.__dict__.copy()
+        dict_d = obj.__dict__.copy()
 
     return dict_d
