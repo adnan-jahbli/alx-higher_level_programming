@@ -61,9 +61,12 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
-        """ Class method that creates a new instance from a given
-        dictionary containing the values of the instance fields"""
-        dummy_obj = cls(2, 1, 3)
+        """ Creates a new instance from a given dictionary
+        containing the values of the instance fields"""
+        if cls.__name__ == "Rectangle":
+            dummy_obj = cls(2, 1)
+        else:
+            dummy_obj = cls(2)
         dummy_obj.update(**dictionary)
         return dummy_obj
 
