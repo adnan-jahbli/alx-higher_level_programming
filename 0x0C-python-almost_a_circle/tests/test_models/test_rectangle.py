@@ -97,6 +97,7 @@ class TestRectangle(unittest.TestCase):
         """Test passing an invalid value for 'y'"""
         with self.assertRaises(TypeError):
             new = Rectangle(2, 2, 2, "2", 2)
+
     def test_value_attrs(self):
         """ Trying to pass invalid values """
         with self.assertRaises(ValueError):
