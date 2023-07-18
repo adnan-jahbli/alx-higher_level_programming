@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ This module contains a class that defines the class Base """
 import json
+import csv
 
 
 class Base:
@@ -78,6 +79,43 @@ class Base:
             with open(file_name, 'r', encoding="utf-8") as f:
                 json_string = f.read()
                 python_list = cls.from_json_string(json_string)
+                list_obj = [cls.create(**dic) for dic in python_list]
+                return list_obj
+        except FileNotFoundError:
+            return []
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """ Saves python list to a csv file """
+        if not list_objs:
+            list_objs = []
+
+        list_d = [obj.to_dictionary() for obj in list_objs]
+
+        filename = cls.__name__ + ".csv"
+        if cls.__name__ == "Rectangle":
+            fieldnames = ["id", "width", "height", "x", "y"]
+        else:
+            fieldnames = ["id", "size", "x", "y"]
+
+        with open(filename, 'w', encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(list_d)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """ Class method that returns a list of instances """
+        file_name = cls.__name__ + ".csv"
+        try:
+            with open(file_name, 'r', encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                python_list = list(reader)
+                # coverting values to int data type instead of str
+                for dic in python_list:
+                    for key, value in dic.items():
+                        dic[key] = int(value)
+                # creating new instances and save them in a list
                 list_obj = [cls.create(**dic) for dic in python_list]
                 return list_obj
         except FileNotFoundError:
